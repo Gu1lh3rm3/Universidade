@@ -1,6 +1,8 @@
 package fei_secretaria;
 
 import javax.swing.JOptionPane;
+import java.util.ArrayList;
+import javax.swing.JTable;
 
 /*@author uniegsodre*/
 public class universidade extends javax.swing.JFrame {
@@ -478,12 +480,37 @@ public class universidade extends javax.swing.JFrame {
     }//GEN-LAST:event_bInserirActionPerformed
 
     private void bAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAtualizarActionPerformed
-        // TODO add your handling code here:
+        private ResultSet rs ;
         DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
-        disciplinaDAO.buscar();
-            //atualiza informações na tabela
-    }//GEN-LAST:event_bAtualizarActionPerformed
 
+        try {
+            rs = disciplinaDAO.buscar();
+            // Obter o TableModel existente da tabela
+            DefaultTableModel model = (DefaultTableModel) tableDisciplinas.getModel();
+            // Limpar as linhas existentes da tabela
+            model.setRowCount(0);
+
+            while (rs.next()) {
+                //apenas para visualizacao no terminal do netbeans
+                String lista = ("Codigo: " + rs.getString("CODIGO") + " - " +
+                                "Nome: " + rs.getString("NOME") + " - " +
+                                "Semestre: " + rs.getInt("SEMESTRE") + " - " +
+                                "Professor: " + rs.getString("PROFESSOR"));
+                System.out.println(lista);
+
+                //informacoes para inserir na tabela
+                String codigo = rs.getString("CODIGO");
+                String nome = rs.getString("NOME");
+                int semestre = rs.getInt("SEMESTRE");
+                String professor = rs.getString("PROFESSOR");
+
+                Object[] linha = {codigo, nome, semestre, professor};
+                tableDisciplinas.addRow(linha);     //talvez dê problema aqui
+            }
+        } catch( SQLException e) {
+            System.out.println("Consulta não foi possível" + e.getMessage());
+        }
+    }//GEN-LAST:event_bAtualizarActionPerformed
     private void bRemoverDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoverDisciplinaActionPerformed
         //Pegar campo selecinoado da tabela
         int row = tableDisciplinas.getSelectedRow();
