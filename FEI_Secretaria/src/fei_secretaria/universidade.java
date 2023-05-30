@@ -472,24 +472,69 @@ public class universidade extends javax.swing.JFrame {
         String nome         = txtCadastroDisciplina.getText();
         int semestre        = Integer.valueOf(txtCadastroSemestre.getText());
         String professor    = txtCadastroProfessor.getText();
-        
         Disciplina disciplina = new Disciplina(codigo, nome, semestre, professor);
         DisciplinaDAO disCRUD = new DisciplinaDAO();
-        
         disCRUD.inserir(disciplina);
-    
     }//GEN-LAST:event_bInserirActionPerformed
 
     private void bAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAtualizarActionPerformed
         // TODO add your handling code here:
         DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
         disciplinaDAO.buscar();
+            //atualiza informações na tabela
     }//GEN-LAST:event_bAtualizarActionPerformed
 
     private void bRemoverDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoverDisciplinaActionPerformed
-        // TODO add your handling code here:
+        //Pegar campo selecinoado da tabela
+        int row = tableDisciplinas.getSelectedRow();
+        String codigo = tableDisciplinas.getValueAt(row, 1).toString();
+        //cria uma disciplinaDAO para execucao do metodo remover
+        DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
+        disciplinaDAO.remover(codigo);
+            //atualiza informações na tabela
     }//GEN-LAST:event_bRemoverDisciplinaActionPerformed
 
+    //EVENTOS PERTINENTES AO ALUNO
+    private void bInserirAluno(){
+        String nome         = txtCadastroAluno.getText();
+        int ra              = Integer.valueOf(txtCadastroRA.getText());
+        String login        = txtCadastroLogin.getText();
+        
+        Aluno aluno = new Aluno(ra, nome, login);
+        AlunoDAO alunoCRUD = new AlunoDAO();
+        alunoCRUD.inserir(aluno);
+    }
+
+    private void bRemoverAluno(){
+        //Pegar campo selecinoado da tabela
+        int row = tableAlunos.getSelectedRow();
+        String ra = tableAlunos.getValueAt(row, 1).toString();
+        //cria uma disciplinaDAO para execucao do metodo remover
+        AlunoDAO alunoDAO = new AlunoDAO();
+        alunoDAO.remover(ra);
+        //atualiza informações na tabela
+        //https://www.devmedia.com.br/jtable-utilizando-o-componente-em-interfaces-graficas-swing/28857
+    }
+
+    private void bAtualizar(){
+        //atualiza informações na tabela
+        //https://www.devmedia.com.br/jtable-utilizando-o-componente-em-interfaces-graficas-swing/28857
+    }
+
+    //EVENTOS PERTINENTES À NOTA
+    //atribuir aluno a uma nota
+    private void bInserirNota(){
+
+    }
+    //remover aluno de uma nota
+    private void bRemoverAluno(){
+
+    }
+    //atualizar notas 1 ou 2
+    private void bAtualizarNota(){
+
+    }
+    
     /**
      * @param args the command line arguments
      */
