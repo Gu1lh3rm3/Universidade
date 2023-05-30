@@ -1,0 +1,34 @@
+#
+# 	RESUMO DO PROBLEMA
+#
+
+SECRETARIA
+-Realiza cadastro/remoção de alunos (com todos seus atributos: RA, nome, senha, login)
+-Realiza cadastro/remoção de disciplinas (com todos seus atributos: código, nome, semestre e professor)
+-Realiza lançamento de notas (deveria ser o professor, mas simplifiquei o problema)
+
+
+ALUNO "apenas visualiza as informações"
+-Realiza login na plataforma
+-Visualiza histório de disciplinas que já cursou(tabela contendo: | semestre | disciplina | média |
+-Visualiza disciplinas/notas do semestre atual 	(tabela contendo: | semestre | disciplina | nota 1 | nota2 | média |
+-Tem permissão para alterar senha, caso esqueça
+
+# 
+# Nesta pasta contém arquivos em .CSV para importar no banco de dados
+#
+# Os arquivos foram gerados com intenção de testar o acesso ao banco de dados
+#
+
+	TABELA ALUNOS 		| RA |	nome |	senha |	login |
+(chave primária: RA)
+
+
+
+	TABELA DISCIPLINAS	| código | disciplina | semestre | professor |
+(chave primária: código)
+
+
+
+	TABELA NOTAS 		| código | disciplina | semestre | RA |	nota1 |	nota2 |	média |
+(chaves primárias: código e RA)
